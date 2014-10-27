@@ -1,0 +1,454 @@
+<head>
+	<title>NMI Rate Finder App</title>
+	<meta charset="UTF-8">
+	<meta name="generator" content="Silex v2.0"> <!-- leave this for stats -->
+	<script type="text/javascript" src="http://static.silex.me/2.2/jquery.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.2/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.2/pageable.js"></script>
+	<script type="text/javascript" src="http://static.silex.me/2.2/front-end.js"></script>
+	<!-- Normalize -->
+	<link href="http://static.silex.me/2.2/normalize.css" rel="stylesheet">
+	<!-- Silex style -->
+	<link href="http://static.silex.me/2.2/front-end.css" rel="stylesheet">
+
+	<style type="text/css" class="silex-style">
+/*
+	Here are the CSS styles of your website.
+
+	Bellow are some examples, like the styles which you can apply to your text in the text editor.
+
+	See this page for help on CSS
+	https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started
+
+	In the advanced "Apollo" mode, you will be able to add CSS classes to Silex elements,
+	and then apply a CSS style to it here.
+*/
+
+/* define a style for Title, Headings and Normal texts */
+.title,
+.heading1,
+.heading2,
+.heading3,
+.normal {
+  color: #666666;
+  font-family: verdana, arial;
+	margin: 0;
+}
+
+/* title style */
+.title {
+  font-size: 45px;
+}
+div.dropdown_container {
+    width:170px;
+}
+
+select.my_dropdown {
+    width:auto;
+}
+
+/*IE FIX */
+select#my_dropdown {
+    width:100%;
+}
+
+select:focus#my_dropdown {
+    width:auto;
+}
+
+div.dropdown_container1 {
+    width:150px;
+}
+
+select.my_dropdown1 {
+    width:auto;
+}
+
+/*IE FIX */
+select#my_dropdown1 {
+    width:100%;
+}
+
+select:focus#my_dropdown1 {
+    width:auto;
+}
+
+.onoffswitch {
+    position: relative; width: 70px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px rgba(0,0,0,0.08) inset;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+    border-radius: 20px 0 0 20px;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+    border-radius: 0 20px 20px 0;
+}
+.onoffswitch-switch {
+    display: block; width: 20px; margin: 0px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 46px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+    background-image: -moz-linear-gradient(center top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 80%); 
+    background-image: -webkit-linear-gradient(center top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 80%); 
+    background-image: -o-linear-gradient(center top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 80%); 
+    background-image: linear-gradient(center top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 80%);
+    box-shadow: 0 1px 1px white inset;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+.css_button {
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: bold;
+    text-decoration: inherit;
+    -webkit-border-radius: 8px 8px 8px 8px;
+    -moz-border-radius: 8px 8px 8px 8px;
+    border-radius: 8px 8px 8px 8px;
+    border: 1px solid #3866a3;
+    padding: 13px 26px;
+    text-shadow: 1px 1px 0px #7cacde;
+    -webkit-box-shadow: inset 1px 1px 0px 0px #bee2f9;
+    -moz-box-shadow: inset 1px 1px 0px 0px #bee2f9;
+    box-shadow: inset 1px 1px 0px 0px #bee2f9;
+    cursor: pointer;
+    color: #FFFFFF;
+    display: inline-block;
+    background: -webkit-linear-gradient(90deg, #468ccf 5%, #63b8ee 100%);
+    background: -moz-linear-gradient(90deg, #468ccf 5%, #63b8ee 100%);
+    background: -ms-linear-gradient(90deg, #468ccf 5%, #63b8ee 100%);
+    background: linear-gradient(180deg, #63b8ee 5%, #468ccf 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#63b8ee",endColorstr="#468ccf");
+}
+
+.css_button:hover {
+    background: -webkit-linear-gradient(90deg, #63b8ee 5%, #468ccf 100%);
+    background: -moz-linear-gradient(90deg, #63b8ee 5%, #468ccf 100%);
+    background: -ms-linear-gradient(90deg, #63b8ee 5%, #468ccf 100%);
+    background: linear-gradient(180deg, #468ccf 5%, #63b8ee 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#468ccf",endColorstr="#63b8ee");
+}
+
+.css_button:active {
+    position:relative;
+    top: 1px;
+}
+
+
+div.dropdown_container2 {
+    width:120px;
+}
+
+select.my_dropdown2 {
+    width:auto;
+}
+
+/*IE FIX */
+select#my_dropdown2 {
+    width:100%;
+}
+
+select:focus#my_dropdown2 {
+    width:auto;
+}
+</style>
+  <script type="text/javascript" class="silex-script"></script>
+<style id="current-page-style">.page-rate-finder-{display:inherit; }</style></head>
+<body style="cursor: auto; background-color: transparent;" data-silex-type="container" class="silex-runtime">
+	<a id="page-landing-page" data-silex-type="page" class="page-element">Landing page</a>
+	<div class="background editable-style container-element" data-silex-type="container" style="top: 5px; left: 55px; width: 320px; height: 1103px; position: absolute; background-color: rgb(255, 255, 255);">
+	<div data-silex-type="image" class="editable-style image-element paged-element page-landing-page" style="position: absolute; height: 497px; width: 285.234782608696px; left: 18px; top: -169px;"><img src="IMG_4682.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="image" class="editable-style image-element paged-element page-landing-page" style="position: absolute; height: 566px; width: 319.549815498155px; top: -86px;"><img src="NMI%20Logo.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="image" class="editable-style image-element paged-element page-landing-page" style="position: absolute; height: 173px; width: 305.536723163842px; top: 119px; left: 8px;"><img src="Bridge.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="text" class="editable-style text-element paged-element page-landing-page" style="position: absolute; height: 33px; width: 140px; top: 73px; left: 89px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font size="5" color="#000000">Rate Finder</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 22px; width: 173px; top: 80px; left: 146px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Purchase</option>
+    <option value="2">Refinance-Cash Out</option>
+    <option value="3">Refinance-Limited Cash Out/Rate Term</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 110px; top: 81px; left: 6px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Loan Purpose</font></div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 117px; top: 118px; left: 4px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Premium Plan</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 170px; top: 161px; left: 146px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Constant</option>
+    <option value="2">Amortized</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 129px; top: 158px; left: 3px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Renewal Option</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 22px; width: 173px; top: 119px; left: 145px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Borrower Paid/Lender Paid Monthly</option>
+    <option value="2">Borrower Paid Annual</option>
+    <option value="3">Borrower Paid Non Refundable</option>
+    <option value="4">Lender Paid Single</option>
+    <option value="5">Borrower Paid Refundable</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 80px; top: 234px; left: 6px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Coverage</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 230px; left: 145px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">35%</option>
+    <option value="2">30%</option>
+    <option value="3">25%</option>
+    <option value="4">18%</option>
+    <option value="5">16%</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 113px; top: 196px; left: 4px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Loan Amount</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 23px; width: 174px; top: 195px; left: 143px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" placeholder="$0.00"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 170px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+
+
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 113px; top: 270px; left: 5px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Credit Score</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 23px; width: 174px; top: 270px; left: 144px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" type="text"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 170px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 90px; top: 307px; left: 3px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Loan Term</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 23px; width: 174px; top: 307px; left: 145px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" type="text" placeholder="Months"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 170px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 95px; top: 341px; left: 3px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Occupancy</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 343px; left: 146px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Primary Residence</option>
+    <option value="2">Second Home</option>
+    <option value="3">Investment</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 129px; top: 379px; left: 3px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Property Type</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 381px; left: 146px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Single Family</option>
+    <option value="2">Condo</option>
+    <option value="3">Cooperative</option>
+    <option value="4">Two Unit</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 10px; width: 160px; top: 420px; left: 2px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Premium State Tax</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 155px; top: 419px; left: 165px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container1">
+  <select class="my_dropdown1" id="my_dropdown1">
+    <option value="1">No Premium Tax</option>
+    <option value="2">Florida (1.30%)</option>
+    <option value="3">Kentucky (1.80%)</option>
+    <option value="4">West Virginia (.55%)</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 129px; top: 498px; left: 11px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Eligibility Check</font></div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 157px; top: 459px; left: 5px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Credit Union Rates</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 29px; width: 74px; top: 458px; left: 208px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></div></div><div data-silex-type="image" class="editable-style image-element page-rate-finder- paged-element" style="position: absolute; height: 65px; width: 323.818181818182px; left: -1px; top: 1px;"><img src="NMI%20Banner.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 29px; width: 74px; top: 496px; left: 209px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="onoffswitch">
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div></div></div><div data-silex-type="image" class="editable-style image-element page-rate-finder- paged-element" style="position: absolute; height: 167px; width: 305.536723163842px; top: 946px; left: 14px;"><img src="Bridge.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 50px; width: 112px; top: 919px; left: 111px; background-color: rgb(255, 255, 255);" data-silex-href="#!page-results"><div class="silex-element-content" style="width: 100%; height: 100%;"><span class="css_button">Submit</span></div></div><div data-silex-type="image" class="editable-style image-element page-results paged-element" style="position: absolute; height: 63px; width: 322.5px; left: -2px;"><img src="Results.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="html" class="editable-style html-element page-results paged-element page-link-active" style="position: absolute; height: 50px; width: 88px; top: 386px; left: 11px; background-color: rgb(255, 255, 255);" data-silex-href="#!page-rate-finder-"><div class="silex-element-content" style="width: 100%; height: 100%;"><input type="button" class="css_button" value="Edit"></div></div><div data-silex-type="html" class="editable-style html-element page-results paged-element" style="position: absolute; height: 50px; width: 159px; top: 387px; left: 146px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input type="button" class="css_button" value="Email Results"></div></div><div data-silex-type="image" class="editable-style image-element page-results paged-element" style="position: absolute; height: 262px; width: 316.172932330827px; top: 62px;"><img src="Rate%20Results.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="text" class="editable-style text-element page-results paged-element" style="position: absolute; height: 35px; width: 289px; top: 341px; left: 10px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#0000ff" size="2">*If you need assistance, please contact the Solutions Center</font></div></div><div data-silex-type="image" class="editable-style image-element page-results paged-element" style="position: absolute; height: 169px; width: 305.536723163842px; top: 449px; left: 8px;"><img src="Bridge.png" class="silex-element-content" style="width: 100%; height: 100%;"></div><div data-silex-type="html" class="editable-style html-element page-landing-page paged-element page-link-active" style="position: absolute; height: 50px; width: 101px; top: 334px; left: 114px; background-color: rgb(255, 255, 255);" data-silex-href="#!page-rate-finder-"><div class="silex-element-content" style="width: 100%; height: 100%;"><input type="button" class="css_button" value="Begin"></div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 135px; top: 533px; left: 6px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">First Adjustment</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 22px; width: 158px; top: 536px; left: 150px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" type="text" placeholder="Months"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 150px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 88px; top: 572px; left: 7px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Buydown</font></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 572px; left: 137px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Yes</option>
+    <option value="2">No</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 135px; top: 618px; left: 3px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><font color="#000000">Property Zip</font><div><font color="#000000"><br></font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 23px; width: 158px; top: 618px; left: 150px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" type="text" placeholder="Zip Code"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 150px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 135px; top: 659px; left: 5px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">State</font></div></div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 135px; top: 694px; left: 6px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">Total DTI</font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 23px; width: 158px; top: 695px; left: 152px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><input class="textbox" type="text" placeholder="0.00%"> 
+
+ 
+ 
+<style> 
+.textbox {
+    height: 20px;
+    width: 150px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+}
+
+.textbox:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 0 8px;
+}   
+</style> 
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 171px; top: 737px; left: 6px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">DU Recommendation</font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 126px; top: 737px; left: 189px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container2">
+  <select class="my_dropdown2" id="my_dropdown2">
+    <option value="1">Approve/Eligible</option>
+    <option value="2">Approve/Ineligible</option>
+    <option value="3">Refer with Caution</option>
+    <option value="4">Out of Scope</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 171px; top: 778px; left: 7px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">LP Risk Classification</font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 125px; top: 778px; left: 190px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container2">
+  <select class="my_dropdown2" id="my_dropdown2">
+    <option value="1">Accept</option>
+    <option value="2">Caution</option>
+    <option value="3">Caution A-</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 254px; top: 816px; left: 5px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">Freddie Mac Purchase Eligibility</font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 842px; left: 138px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Eligible</option>
+    <option value="2">Ineligible</option>
+  </select>
+</div>
+
+</div></div><div data-silex-type="text" class="editable-style text-element page-rate-finder- paged-element" style="position: absolute; height: 18px; width: 112px; top: 883px; left: 4px; background-color: rgb(255, 255, 255);"><div class="silex-element-content normal" style="width: 100%; height: 100%;"><div><font color="#000000">Refund Type</font></div></div></div><div data-silex-type="html" class="editable-style html-element page-rate-finder- paged-element" style="position: absolute; height: 24px; width: 176px; top: 880px; left: 139px; background-color: rgb(255, 255, 255);"><div class="silex-element-content" style="width: 100%; height: 100%;"><div class="dropdown_container">
+  <select class="my_dropdown" id="my_dropdown">
+    <option value="1">Refund</option>
+    <option value="2">No Refund</option>
+  </select>
+</div>
+
+</div></div></div>
+
+
+<a id="page-rate-finder-" data-silex-type="page" class="page-element">Rate Finder </a><a id="page-results" data-silex-type="page" class="page-element">Results</a></body>
